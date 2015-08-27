@@ -1,0 +1,52 @@
+body{
+	background-color:grey;
+}
+
+#screen{
+	background-color:#DEDCC5;
+	width:900px;
+	height:200px;
+	
+	margin-left:20%;
+	margin-right:20%;
+	margin-top:200px;
+
+	
+	border: 2px solid #3C4345;
+}
+
+#titleBar{
+	background-color:2A5778;
+	color:white;
+	height:50px;
+	width:900px;
+}
+
+#titleBarContent{
+	padding: 15px 15px;
+	font-size:30;
+}
+
+#screenBody{
+	padding: 15px 15px;
+	font-size:20;
+}
+
+.loginInput{
+	background-color:#F3F5E9;
+	width:150px;
+	height:20px;
+	border:none;
+	
+}
+
+.loginInput:hover{
+	background-color:white;
+	width:150px;
+	height:20px;
+	border:none;
+}
+
+.alignDescriptions{
+	width:110px;
+}
