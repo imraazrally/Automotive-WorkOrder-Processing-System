@@ -22,15 +22,16 @@ public class SelectCustomer {
 		//Creating a list of allowed permission
 		@SuppressWarnings("serial")
 		ArrayList<Integer> permission=new ArrayList<Integer>(){{ 
-			//This page requries users to have Admin level Permission
+			//This page requries users to have at least GUEST level permission
 			add(LoginConsts.ADMIN);
 			add(LoginConsts.GUEST);
 		}};
 		
-		// Verifying if user has admin level permission
+		// Verifying if user has gust+ level permission
 		KeyVerifier verifier=new KeyVerifier(key,permission);
 		if(verifier.verify())return doTask();
 		
+		//If user does not satisfy required permissions,
 		return new ModelAndView(LoginConsts.roleIdToView.get(LoginConsts.BLOCKED));
 	}
 	
