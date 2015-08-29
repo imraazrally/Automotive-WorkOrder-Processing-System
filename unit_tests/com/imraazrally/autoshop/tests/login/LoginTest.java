@@ -1,4 +1,4 @@
-package com.imraazrally.autoshop.tests.unit;
+package com.imraazrally.autoshop.tests.login;
 import static org.junit.Assert.*;
 
 import java.sql.Connection;
@@ -14,12 +14,12 @@ import com.imraazrally.autoshop.model.login.LoginConsts;
 import com.imraazrally.autoshop.model.login.LoginDb;
 import com.imraazrally.autoshop.model.login.User;
 import com.imraazrally.autoshop.model.login.KeyVerifier;
-public class testLoginModel{	
+public class LoginTest{	
 	User user;
 	Key key;
 	Connection dbConnection;
 	
-	@Test
+	@Test	
 	public void main() throws SQLException{
 		UserAndKeyObjects();
 		KeyGen();
@@ -41,7 +41,7 @@ public class testLoginModel{
 		key=new Key(user);
 		assertEquals(username, key.getUsername());
 		assertEquals(password, key.getPassword());		
-		assertEquals(1,key.getRole()); // Imraaz has admin level permission
+		assertEquals(LoginConsts.ADMIN,key.getRole()); // Imraaz has admin level permission
 	}
 	
 	// Test Objects [KeyGen]
