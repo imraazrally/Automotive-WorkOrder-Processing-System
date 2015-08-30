@@ -1,3 +1,2 @@
-<br> 1. <a href="selectCustomerUsingName.html"> Lookup Using First & Last name </a>
-<br> 2. <a href="selectCustomerUsingPhone.html">Lookup Using Phone Number</a>
-<br> 3. Lookup Using Customer Id 
+<br><h2> 1. <a href="selectCustomerUsingName.html"> Lookup Using First & Last name </a> </h2>
+<h2> 2. <a href="selectCustomerUsingPhone.html">Lookup Using Phone Number</a></h2>

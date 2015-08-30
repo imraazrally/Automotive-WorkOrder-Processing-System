@@ -5,26 +5,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.imraazrally.autoshop.model.customers.services.SelectCustomer;
-
-public class SelectCustomerUsingPhone implements SelectCustomer{
-	private String phoneNo;
+public class SelectCustomerUsingName {
+	private String fName;
+	private String lName;
 	private Connection dbConnection;
-	private ArrayList<Customer> customers;
+	private ArrayList <Customer> customers;
 	
-	public SelectCustomerUsingPhone(String phoneNo, Connection dbConnection) throws SQLException{
-		this.phoneNo=phoneNo;
+	public SelectCustomerUsingName(String fName, String lName, Connection dbConnection) throws SQLException{
+		this.fName=fName;
+		this.lName=lName;
 		this.dbConnection=dbConnection;
-		this.customers=new ArrayList<Customer>();
+		customers=new ArrayList<Customer>();
 		retrieveCustomers();
 	}
 	
 	private void retrieveCustomers() throws SQLException{
-		// The SQL Query
-		String query=String.format(CustomerConsts.GET_CUSTOMER_USING_PHONE_QUERY, phoneNo);
+		
+		String query=String.format(CustomerConsts.GET_CUSTOMER_USING_NAME_QUERY, fName,lName);
 		ResultSet results=dbConnection.createStatement().executeQuery(query);
 		
-		// for each row of customer information that we retrieve, we build a customer object and store it
 		while(results.next())
 			customers.add(buildCustomer(results));
 	}
@@ -41,8 +40,9 @@ public class SelectCustomerUsingPhone implements SelectCustomer{
 		return customer;
 	}
 	
+	
 	public ArrayList<Customer> getCustomers(){
 		return customers;
 	}
-
+	
 }

@@ -25,18 +25,23 @@ public class SelectCustomer {
 
 	@RequestMapping("/selectCustomerUsingPhone")
 	public ModelAndView selectCustomerUsingPhone(HttpServletRequest request){
-		// Getting User Key
 		Key key = (Key) request.getSession().getAttribute("key");
-		
-		// Verifier Object
-		KeyVerifier verifier=new KeyVerifier(key, permissions);
-		
-		// If user's key contains necessary permission allowences, forward to the destination
-		if (verifier.verify())return new ModelAndView("customers/selectCustomerPhone");
-		
-		// Else Display No Access Allowed Page
-		return new ModelAndView(LoginConsts.roleIdToView.get(LoginConsts.BLOCKED));
+		String view="customers/selectCustomerUsingPhone";
+		return verifyAndForwardToView(key, view );
 	}
 	
+	@RequestMapping("/selectCustomerUsingName")
+	public ModelAndView selectCustomerUsingName(HttpServletRequest request){
+		Key key = (Key) request.getSession().getAttribute("key");
+		String view= "customers/selectCustomerUsingName";
+		return verifyAndForwardToView(key,view);
+	}
+	
+	private ModelAndView verifyAndForwardToView(Key key, String view){
+		KeyVerifier verifier=new KeyVerifier(key, permissions);
+		if (verifier.verify()) return new ModelAndView(view);
+		// if permissions fail, Display No-Access-Allowed Page
+		return new ModelAndView(LoginConsts.roleIdToView.get(LoginConsts.BLOCKED));
+	}
 
 }

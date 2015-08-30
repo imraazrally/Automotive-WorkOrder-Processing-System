@@ -22,7 +22,7 @@ public class LoginTest{
 	Connection dbConnection;
 
 	PermissionWallet permissions=new PermissionWallet(){{
-		addPermission(new Permission(LoginConsts.ADMIN));
+		addPermission(new Permission(LoginConsts.BLOCKED));
 		addPermission(new Permission(LoginConsts.GUEST));
 	}};
 	

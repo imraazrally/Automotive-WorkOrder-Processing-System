@@ -9,40 +9,40 @@ public class Customer {
 	private String address;
 
 	public Customer(String fName, String lName, String email, String phone, String address) {
-		this.fName = new String(fName);
-		this.lName = new String(lName);
-		this.email = new String(email);
-		this.phone = new String(phone);
-		this.address = new String(address);
+		this.fName = fName;
+		this.lName = lName;
+		this.email = email;
+		this.phone = phone;
+		this.address =address;
 	}
 	
 	public Customer(int customerId, String fName, String lName, String email, String phone, String address){
 		this.customerId=customerId;
-		this.fName = new String(fName);
-		this.lName = new String(lName);
-		this.email = new String(email);
-		this.phone = new String(phone);
-		this.address = new String(address);
+		this.fName = fName;
+		this.lName = lName;
+		this.email = email;
+		this.phone = phone;
+		this.address =address;
 	}
 	
 	public String getFName() {
-		return new String(fName);
+		return fName;
 	}
 
 	public String getLName() {
-		return new String(lName);
+		return lName;
 	}
 
 	public String getEmail() {
-		return new String(email);
+		return email;
 	}
 
 	public String getPhone() {
-		return new String(phone);
+		return phone;
 	}
 
 	public String getAddress() {
-		return new String(address);
+		return address;
 	}
 	
 	public int getCustomerId(){

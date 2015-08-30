@@ -20,10 +20,10 @@ public class Key {
 	}
 
 	public String getUsername() {
-		return new String(username);
+		return username;
 	}
 
 	public String getPassword() {
-		return new String(password);
+		return password;
 	}
 }
