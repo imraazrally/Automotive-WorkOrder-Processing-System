@@ -1,11 +1,11 @@
 $(document).ready(function(){
 	$("#btnAdd").click(function(){
-		$("#results").load('forms/customers/addCustomer.frm');
+		$("#results").load('forms/customers/addCustomer.txt');
 		$("#submit").html("<input type='button' value='Add Customer' onclick='addCustomer()'/>");
 	});
 	
 	$("#btnSelect").click(function(){
-		$("#results").load('forms/customers/selectCustomer.frm');
+		$("#results").load('forms/customers/selectCustomer.txt');
 		$("#submit").html("");
 	});
 

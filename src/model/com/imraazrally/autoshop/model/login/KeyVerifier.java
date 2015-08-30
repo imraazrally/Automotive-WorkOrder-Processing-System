@@ -4,16 +4,16 @@ import java.util.ArrayList;
 
 public class KeyVerifier {
 	private Key key;
-	private ArrayList<Integer> permissions;
+	private PermissionWallet permissions;
 	
-	public KeyVerifier(Key key, ArrayList<Integer> permissions){
+	public KeyVerifier(Key key, PermissionWallet permissions){
 		this.key=key;
 		this.permissions=permissions;
 	}
 	
 	public boolean verify(){
 		try{
-			if (permissions.contains(key.getRole())) return true;
+			if (permissions.hasPermit(new KeyToPermissionAdaptor(key))) return true;
 		}catch(Exception e){e.printStackTrace();}
 		return false;
 	}

@@ -11,31 +11,32 @@ import org.springframework.web.servlet.ModelAndView;
 import com.imraazrally.autoshop.model.login.Key;
 import com.imraazrally.autoshop.model.login.KeyVerifier;
 import com.imraazrally.autoshop.model.login.LoginConsts;
+import com.imraazrally.autoshop.model.login.Permission;
+import com.imraazrally.autoshop.model.login.PermissionWallet;
 
 @Controller
 public class SelectCustomer {
-	@RequestMapping("/selectCustomerUsingPhone")
-	public ModelAndView verifyCredentials(HttpServletRequest request){
-		//Getting Key from session
-		Key key = (Key) request.getSession().getAttribute("key");
+	
+	// In order to select customer, The users need Guest+ levell of permissions. So we predifine a list of permissions;
+	PermissionWallet permissions=new PermissionWallet(){{
+		addPermission(new Permission(LoginConsts.ADMIN));
+		addPermission(new Permission(LoginConsts.GUEST));
+	}};
 
-		//Creating a list of allowed permission
-		@SuppressWarnings("serial")
-		ArrayList<Integer> permission=new ArrayList<Integer>(){{ 
-			//This page requries users to have at least GUEST level permission
-			add(LoginConsts.ADMIN);
-			add(LoginConsts.GUEST);
-		}};
+	@RequestMapping("/selectCustomerUsingPhone")
+	public ModelAndView selectCustomerUsingPhone(HttpServletRequest request){
+		// Getting User Key
+		Key key = (Key) request.getSession().getAttribute("key");
 		
-		// Verifying if user has gust+ level permission
-		KeyVerifier verifier=new KeyVerifier(key,permission);
-		if(verifier.verify())return doTask();
+		// Verifier Object
+		KeyVerifier verifier=new KeyVerifier(key, permissions);
 		
-		//If user does not satisfy required permissions,
+		// If user's key contains necessary permission allowences, forward to the destination
+		if (verifier.verify())return new ModelAndView("customers/selectCustomerPhone");
+		
+		// Else Display No Access Allowed Page
 		return new ModelAndView(LoginConsts.roleIdToView.get(LoginConsts.BLOCKED));
 	}
 	
-	private ModelAndView doTask(){
-		return new ModelAndView("customers/selectCustomerPhone");
-	}
+
 }

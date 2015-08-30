@@ -15,23 +15,23 @@ import org.springframework.web.servlet.ModelAndView;
 import com.imraazrally.autoshop.model.login.Key;
 import com.imraazrally.autoshop.model.login.KeyVerifier;
 import com.imraazrally.autoshop.model.login.LoginConsts;
+import com.imraazrally.autoshop.model.login.Permission;
+import com.imraazrally.autoshop.model.login.PermissionWallet;
 
 @Controller
 public class Customers {
+	//Creating a list of allowed permission
+	PermissionWallet permissions=new PermissionWallet(){{
+			addPermission(new Permission(LoginConsts.ADMIN));
+	}};
+			
 	@RequestMapping("/customers")
 	public ModelAndView verifyCredentials(HttpServletRequest request) {
 		//Getting Key from session
 		Key key = (Key) request.getSession().getAttribute("key");
-		
-		//Creating a list of allowed permission
-		@SuppressWarnings("serial")
-		ArrayList<Integer> permission=new ArrayList<Integer>(){{ 
-			//This page requries users to have Admin level Permission
-			add(LoginConsts.ADMIN);
-		}};
-				
+			
 		// Verifying if user has admin level permission
-		KeyVerifier verifier=new KeyVerifier(key,permission);
+		KeyVerifier verifier=new KeyVerifier(key,permissions);
 		if(verifier.verify())return doTask();
 	
 		// If user is not Admin or Key is not found

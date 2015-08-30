@@ -34,13 +34,16 @@ public class SelectCustomerUsingPhone implements SelectCustomer{
 	}
 	
 	public Customer buildCustomer(ResultSet results) throws SQLException{
+		//Building a Customer
 		Customer customer= new Customer(
+								results.getInt("customerId"),
 								results.getString("fName"),
 								results.getString("lName"),
 								results.getString("email"),
 								results.getString("phone"),
 								results.getString("address")
 							);
+		
 		return customer;
 	}
 	

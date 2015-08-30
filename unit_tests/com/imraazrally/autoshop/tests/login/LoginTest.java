@@ -12,12 +12,19 @@ import com.imraazrally.autoshop.model.login.Key;
 import com.imraazrally.autoshop.model.login.KeyGen;
 import com.imraazrally.autoshop.model.login.LoginConsts;
 import com.imraazrally.autoshop.model.login.LoginDb;
+import com.imraazrally.autoshop.model.login.Permission;
+import com.imraazrally.autoshop.model.login.PermissionWallet;
 import com.imraazrally.autoshop.model.login.User;
 import com.imraazrally.autoshop.model.login.KeyVerifier;
 public class LoginTest{	
 	User user;
 	Key key;
 	Connection dbConnection;
+
+	PermissionWallet permissions=new PermissionWallet(){{
+		addPermission(new Permission(LoginConsts.ADMIN));
+		addPermission(new Permission(LoginConsts.GUEST));
+	}};
 	
 	@Test	
 	public void main() throws SQLException{
@@ -55,14 +62,7 @@ public class LoginTest{
 	
 	//Test Objects[Key Verifier]
 	private void KeyVerifier(){
-		@SuppressWarnings("serial")
-		ArrayList<Integer> permissions=new ArrayList<Integer>(){{
-			add(LoginConsts.GUEST);
-			add(LoginConsts.BLOCKED);
-		}};
-		
 		KeyVerifier verifier=new KeyVerifier(key, permissions);
-		
 		//We passed in an admin level key. but the only GUEST & BLOCKED are allowed. Which means the verifier.verify() should return false
 		assertEquals(false,verifier.verify());
 	}
