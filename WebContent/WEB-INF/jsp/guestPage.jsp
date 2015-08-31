@@ -13,7 +13,9 @@
 			</div>
 			
 			<div id="screenBody">
-					This page is coming soon!
+					<i>Below are services available to you,</i>
+					<br><a href="selectCustomerUsingPhone.html">1. Lookup Customer Using Phone</a>
+					<br><a href="selectCustomerUsingName.html">2. Lookup Customer Using Name</a>
 			</div>
 		</div>
 	</body>

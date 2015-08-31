@@ -5,26 +5,8 @@
 	<head>
 		<title>Guest Page</title>
 		<link rel="stylesheet" type="text/css" href="CSS/customers/adminHomeScreen.css">
+		<link rel="stylesheet" type="text/css" href="CSS/customers/resultTableStyle.css">
 	</head>
-	
-	<style>
-		#tblResults{
-			border:1px solid grey;
-		}
-		
-		tr{
-			background-color:#DEDCC5;
-		}
-		
-		tr:hover{
-			background-color:white;
-		}
-		
-		#screenBody{
-			overflow-y:scroll;
-		}
-		
-	</style>
 	
 	<body>
 		<div id="screen" style="height:400px;">

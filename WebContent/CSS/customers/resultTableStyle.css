@@ -1,0 +1,17 @@
+
+#tblResults{
+	border:1px solid grey;
+}
+
+tr{
+	background-color:#DEDCC5;
+}
+
+tr:hover{
+	background-color:white;
+}
+
+#screenBody{
+	overflow-y:scroll;
+}
+

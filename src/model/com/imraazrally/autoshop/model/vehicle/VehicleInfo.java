@@ -25,8 +25,12 @@ public class VehicleInfo {
 		return model.getInfo();
 	}
 	
-	public String getEngineSize(){
-		return engineSize.getInfo();
+	public String getCylinders(){
+		return engineSize.getCylinders();
+	}
+	
+	public String getCc(){
+		return engineSize.getCc();
 	}
 	
 }

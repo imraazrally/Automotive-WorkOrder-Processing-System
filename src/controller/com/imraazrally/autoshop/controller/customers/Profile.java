@@ -14,6 +14,7 @@ import com.imraazrally.autoshop.model.customers.CustomerAction;
 import com.imraazrally.autoshop.model.customers.CustomerProfile;
 import com.imraazrally.autoshop.model.customers.CustomerServices;
 import com.imraazrally.autoshop.model.customers.RetrieveCustomerUsingId;
+import com.imraazrally.autoshop.model.vehicle.ImportVehiclesFromDbUsingCustomerId;
 import com.imraazrally.autoshop.model.vehicle.Vehicle;
 import com.imraazrally.autoshop.model.vehicle.VehicleInfo;
 import com.imraazrally.autoshop.model.vehicle.VehicleStorage;
@@ -34,8 +35,10 @@ public class Profile {
 		Connection dbConnection = (Connection) request.getSession().getAttribute("dbConnection");
 		//Building Customer based on Input parameter from request (customerId)
 		Customer customer=new RetrieveCustomerUsingId(dbConnection,id).getCustomer();
+		//Retrieving Vehicle belonging to the customer
+		ImportVehiclesFromDbUsingCustomerId importVehicle=new ImportVehiclesFromDbUsingCustomerId(dbConnection, customer.getCustomerId());
 		//Building a Profile
-		CustomerProfile profile=new CustomerProfile(customer,new VehicleStorage());
+		CustomerProfile profile=new CustomerProfile(customer,importVehicle.getVehicleStorage());
 		//Forwarind Page
 		target.addObject("profile",profile);
 		return target;

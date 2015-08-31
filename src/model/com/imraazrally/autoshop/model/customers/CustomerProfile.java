@@ -18,12 +18,12 @@ public class CustomerProfile {
 		return customerInfo;
 	}
 	
-	public VehicleStorage getVehicleStorage(){
+	public VehicleStorage getVehiclesStorage(){
 		return vehiclesStorage;
 	}
 	
 	public ArrayList<Vehicle> getVehicles(){
-		return getVehicleStorage().getVehicles();
+		return getVehiclesStorage().getVehicles();
 	}
 	
 	public void addVehicle(Vehicle vehicle){
