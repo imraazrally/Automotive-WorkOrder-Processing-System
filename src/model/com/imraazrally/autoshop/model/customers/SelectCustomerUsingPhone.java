@@ -30,15 +30,14 @@ public class SelectCustomerUsingPhone implements SelectCustomer{
 	}
 	
 	public Customer buildCustomer(ResultSet results) throws SQLException{
-		//Building a Customer
-		Customer customer= new Customer(
-								results.getInt("customerId"),
-								results.getString("fName"),
-								results.getString("lName"),
-								results.getString("email"),
-								results.getString("phone"),
-								results.getString("address"));
-		return customer;
+		//Building a Customer and returning it
+		int customerId=results.getInt("customerId");
+		String fName=results.getString("fName");
+		String lName=results.getString("lName");
+		String email=results.getString("email");
+		String phone=results.getString("phone");
+		String address=results.getString("address");
+		return new Customer(customerId, fName, lName, email, phone,address);
 	}
 	
 	public ArrayList<Customer> getCustomers(){

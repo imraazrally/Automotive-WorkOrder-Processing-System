@@ -20,24 +20,21 @@ public class SelectCustomerUsingName {
 	}
 	
 	private void retrieveCustomers() throws SQLException{
-		
 		String query=String.format(CustomerConsts.GET_CUSTOMER_USING_NAME_QUERY, fName,lName);
 		ResultSet results=dbConnection.createStatement().executeQuery(query);
-		
-		while(results.next())
-			customers.add(buildCustomer(results));
+		//Storing the customers into a list
+		while(results.next())customers.add(buildCustomer(results));
 	}
 	
 	public Customer buildCustomer(ResultSet results) throws SQLException{
-		//Building a Customer
-		Customer customer= new Customer(
-								results.getInt("customerId"),
-								results.getString("fName"),
-								results.getString("lName"),
-								results.getString("email"),
-								results.getString("phone"),
-								results.getString("address"));
-		return customer;
+		//Building a Customer and returning it
+		int customerId=results.getInt("customerId");
+		String fName=results.getString("fName");
+		String lName=results.getString("lName");
+		String email=results.getString("email");
+		String phone=results.getString("phone");
+		String address=results.getString("address");
+		return new Customer(customerId, fName, lName, email, phone,address);
 	}
 	
 	

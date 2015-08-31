@@ -13,9 +13,20 @@ public class VehicleInfo {
 		this.engineSize=engineSize;
 	}
 	
-	public String getYear()			{return year.getInfo();}
-	public String getMake()			{return make.getInfo();}
-	public String getModel()		{return model.getInfo();}
-	public String getEngineSize()	{return engineSize.getInfo();}
+	public String getYear(){
+		return year.getInfo();
+	}
+	
+	public String getMake(){
+		return make.getInfo();
+	}
+	
+	public String getModel(){
+		return model.getInfo();
+	}
+	
+	public String getEngineSize(){
+		return engineSize.getInfo();
+	}
 	
 }

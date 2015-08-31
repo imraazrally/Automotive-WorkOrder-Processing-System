@@ -13,6 +13,10 @@ public class VehicleStorage {
 		vehicles.add(vehicle);
 	}
 	
+	public void remove(Vehicle vehicle){
+		vehicles.remove(vehicle);
+	}
+	
 	public ArrayList<Vehicle> getVehicles(){
 		return vehicles;
 	}

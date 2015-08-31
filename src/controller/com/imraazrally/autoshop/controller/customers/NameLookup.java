@@ -24,7 +24,7 @@ public class NameLookup {
 		HttpServletRequest request
 	){
 		//Which view to forward the results to ?
-		ModelAndView target=new ModelAndView("customers/phoneLookupResults");
+		ModelAndView target=new ModelAndView("customers/lookupResults");
 
 		//Getting Database connection from session
 		Connection dbConnection=(Connection) request.getSession().getAttribute("dbConnection");

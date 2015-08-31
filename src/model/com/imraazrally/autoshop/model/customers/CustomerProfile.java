@@ -14,7 +14,23 @@ public class CustomerProfile {
 		this.vehiclesStorage=vehiclesStorage;
 	}
 	
-	public Customer getCustomerInfo()			 {return customerInfo;}
-	public VehicleStorage getVehicleStorage() 	 {return vehiclesStorage;}
-	public ArrayList<Vehicle> getVehicles() 	 {return getVehicleStorage().getVehicles();}
+	public Customer getCustomerInfo(){
+		return customerInfo;
+	}
+	
+	public VehicleStorage getVehicleStorage(){
+		return vehiclesStorage;
+	}
+	
+	public ArrayList<Vehicle> getVehicles(){
+		return getVehicleStorage().getVehicles();
+	}
+	
+	public void addVehicle(Vehicle vehicle){
+		vehiclesStorage.add(vehicle);
+	}
+	
+	public void removeVehicle(Vehicle vehicle){
+		vehiclesStorage.remove(vehicle);
+	}
 }

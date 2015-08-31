@@ -52,7 +52,7 @@
 									<td><c:out value="${customer.email}"/></td>
 									<td><c:out value="${customer.phone}"/></td>
 									<td><c:out value="${customer.address}"/></td>
-									<td><a href='home.html?id=<c:out value="${customer.customerId}"/>'>[Select]</a></td>
+									<td><a href='customerProfile.html?id=<c:out value="${customer.customerId}"/>'>[Select]</a></td>
 								</tr>
 							</c:forEach>
 							
