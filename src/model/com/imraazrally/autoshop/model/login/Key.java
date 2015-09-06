@@ -1,20 +1,41 @@
 package com.imraazrally.autoshop.model.login;
 
-/*
- A KEY is used to store user pemissions (called roles)
- eg roles: Admin, Guests,...etc
- */
-public class Key {
-	private final int role;
-	private final String username;
-	private final String password;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-	public Key(User user) {
-		this.role = user.getRole();
-		this.username = user.getUsername();
-		this.password = user.getPassword();
+@Entity
+@Table (name="users")
+public class Key {
+	@Id
+	private String username;
+	private String password;
+	private int role;
+
+	public Key(){}
+	
+	public Key(int role, String username, String password) {
+		this.role = role;
+		this.username = username;
+		this.password = password;
+	}
+	
+	public Key(String username){
+		this.username=username;
 	}
 
+	public void setRole(int role){
+		this.role=role;
+	}
+	
+	public void setUsername(String username){
+		this.username=username;
+	}
+	
+	public void setPassword(String password){
+		this.password=password;
+	}
+	
 	public int getRole() {
 		return role;
 	}

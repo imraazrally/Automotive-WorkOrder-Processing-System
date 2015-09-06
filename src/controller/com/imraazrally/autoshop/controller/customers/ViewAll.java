@@ -27,8 +27,7 @@ public class ViewAll {
 			//Storing the list of customers as an attribute
 			target.addObject("customers", select.getCustomers());
 		}catch(Exception e){e.printStackTrace();}
-				
-		
+			
 		return target;
 	}
 }

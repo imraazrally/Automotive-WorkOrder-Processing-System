@@ -39,7 +39,7 @@ public class Profile {
 		//Building Customer based on Input parameter from request (customerId)
 		try{
 			SelectCustomerUsingId select=new SelectCustomerUsingId(sessionFactory.openSession(),id);
-			ImportVehiclesFromDbUsingCustomerId importVehicle=new ImportVehiclesFromDbUsingCustomerId(dbConnection, new Integer(id));
+			ImportVehiclesFromDbUsingCustomerId importVehicle=new ImportVehiclesFromDbUsingCustomerId(sessionFactory.openSession(), new Integer(id));
 
 			//Building a Profile
 			Customer customer=select.getCustomers().get(0);

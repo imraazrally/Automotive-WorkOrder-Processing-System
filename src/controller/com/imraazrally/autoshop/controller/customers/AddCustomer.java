@@ -37,21 +37,17 @@ public class AddCustomer {
 	) throws IOException {
 		// 0. Prerequesites
 		SessionFactory sessionFactory=(SessionFactory)request.getSession().getAttribute("sessionFactory");
-				
 		PrintWriter ajaxResponseWriter = response.getWriter();
 
 		// 1. Creating Customer Object
-		Customer customer = new Customer(fName, lName, email, phone, address);
-
+		Customer customer = new Customer(fName,lName,phone,email,address);
 		// 2. Creating Customer Services Object
 		CustomerServices customerServices = new CustomerServices();
 
 		// 3. Actions to perform
 		CustomerAction addCustomer = new AddCustomerAction(customer,sessionFactory.openSession());
-		CustomerAction printAjaxSuccessResponse = new PrintAjaxResponse(ajaxResponseWriter,
-				CustomerConsts.ADD_CUSTOMER_SUCCESS_MESSAGE);
-		CustomerAction printAjaxFailureResponse = new PrintAjaxResponse(ajaxResponseWriter,
-				CustomerConsts.ADD_CUSTOMER_FAIL_MESSAGE);
+		CustomerAction printAjaxSuccessResponse = new PrintAjaxResponse(ajaxResponseWriter,CustomerConsts.ADD_CUSTOMER_SUCCESS_MESSAGE);
+		CustomerAction printAjaxFailureResponse = new PrintAjaxResponse(ajaxResponseWriter,CustomerConsts.ADD_CUSTOMER_FAIL_MESSAGE);
 
 		// 3. Adding Customer to database and printing ajax response message
 		if (customerServices.execute(addCustomer)) {

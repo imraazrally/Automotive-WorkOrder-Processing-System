@@ -2,9 +2,8 @@ package com.imraazrally.autoshop.model.customers;
 
 import java.io.PrintWriter;
 
-import com.imraazrally.autoshop.model.customers.services.CustomerServicesActions;
 
-public class PrintAjaxResponse extends CustomerAction implements CustomerServicesActions {
+public class PrintAjaxResponse extends CustomerAction{
 	private final PrintWriter writer;
 	private final String message;
 

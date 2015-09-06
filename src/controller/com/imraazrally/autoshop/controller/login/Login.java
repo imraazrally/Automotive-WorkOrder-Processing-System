@@ -16,7 +16,6 @@ import com.imraazrally.autoshop.model.login.Key;
 import com.imraazrally.autoshop.model.login.KeyGen;
 import com.imraazrally.autoshop.model.login.LoginConsts;
 import com.imraazrally.autoshop.model.login.LoginDb;
-import com.imraazrally.autoshop.model.login.User;
 
 /*
  This controller recieves request from the login page. The goal is to 
@@ -36,19 +35,18 @@ public class Login {
 		ModelAndView target = new ModelAndView();
 		
 		// Using the LoginDb Service to get a handle on a database connection
-		Connection dbConnection = new LoginDb().getConnection(LoginConsts.DB_URL, LoginConsts.DB_USER,
-				LoginConsts.DB_PASS);
+		Connection dbConnection = new LoginDb().getConnection(LoginConsts.DB_URL, LoginConsts.DB_USER,LoginConsts.DB_PASS);
 		request.getSession().setAttribute("dbConnection", dbConnection);
 		
-		// Passing the database connection to a KeyGen service and generate a
-		Key key = new KeyGen().getKey(new User(username, password, dbConnection));
-		request.getSession().setAttribute("key", key);
-		target.addObject("key", key);
-
 		// Hibernate Configs
 		SessionFactory sessionFactory=new Configuration().configure().buildSessionFactory();
 		request.getSession().setAttribute("sessionFactory", sessionFactory);
 		
+		// Passing the database connection to a KeyGen service and generate a
+		Key key = new KeyGen(sessionFactory.openSession()).getKey(username, password);
+		request.getSession().setAttribute("key", key);
+		target.addObject("key", key);
+
 		// Based on the KEY's roleID, we forward to user to appropriate view.
 		target.setViewName(LoginConsts.roleIdToView.get(key.getRole()));
 		return target;

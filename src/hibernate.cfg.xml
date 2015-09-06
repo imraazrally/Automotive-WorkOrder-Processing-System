@@ -26,6 +26,8 @@
    <!-- List of XML mapping files -->
    <mapping class="com.imraazrally.autoshop.model.customers.Customer"/>
    <mapping class="com.imraazrally.autoshop.model.login.Key"/>
+   <mapping class="com.imraazrally.autoshop.model.vehicle.VehicleInfo"/>
+
 
 </session-factory>
 </hibernate-configuration>

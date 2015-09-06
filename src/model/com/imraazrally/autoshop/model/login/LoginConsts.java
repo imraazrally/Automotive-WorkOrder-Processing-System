@@ -10,7 +10,7 @@ public class LoginConsts {
 	public static final String DB_PASS = "1234";
 
 	// Users table info
-	public static final String CHECK_CREDENTIALS_QUERY = "SELECT role FROM users WHERE username='%s' and password='%s'";
+	public static final String CHECK_CREDENTIALS_QUERY = "SELECT * FROM users WHERE username='%s' and password='%s'";
 	public static final String ROLE_ID_COL = "role";
 
 	// Home Page Views and RoleIds
