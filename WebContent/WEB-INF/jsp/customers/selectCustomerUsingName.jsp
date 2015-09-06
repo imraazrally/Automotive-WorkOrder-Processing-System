@@ -15,8 +15,9 @@
 			<div id="screenBody">
 					<form action="nameLookup.html">
 						
-						First Name: <input type="text" name="fName"/><br>						
-						Last Name: <input type="text" name="lName"/><br><br>
+						First Name: <input type="text" name="fName"/><br>
+						Or<br>						
+						Last Name: <input type="text" name="lName"/><br>
 						
 						<input type="submit" value="Look-Up"/><br>
 						

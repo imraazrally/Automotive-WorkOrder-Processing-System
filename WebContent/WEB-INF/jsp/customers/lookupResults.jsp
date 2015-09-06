@@ -25,7 +25,7 @@
 								<th>E-mail</th>
 								<th>Phone</th>
 								<th>Address</th>
-								<th>Option</th>
+								<th>Actions</th>
 							</tr>
 							<c:forEach items="${customers}" var="customer">
 								<tr>
@@ -35,6 +35,8 @@
 									<td><c:out value="${customer.phone}"/></td>
 									<td><c:out value="${customer.address}"/></td>
 									<td><a href='customerProfile.html?id=<c:out value="${customer.customerId}"/>'>[Select]</a></td>
+									<td><a href='removeCustomer.html?id=<c:out value="${customer.customerId}"/>'>[Remove]</a></td>
+
 								</tr>
 							</c:forEach>
 							

@@ -19,8 +19,9 @@
 				
 				<b><u>Customers</u></b>
 				<br><a href="customers.html">1. Add New Customers</a>
-				<br><a href="selectCustomerUsingPhone.html">2. Lookup Customer Using Phone</a>
-				<br><a href="selectCustomerUsingName.html">3. Lookup Customer Using Name</a>
+				<br><a href="viewAllCustomers.html">2. View All Customers</a>
+				<br><a href="selectCustomerUsingPhone.html">3. Lookup Customer Using Phone</a>
+				<br><a href="selectCustomerUsingName.html">4. Lookup Customer Using Name</a>
 				
 				<hr>
 				
