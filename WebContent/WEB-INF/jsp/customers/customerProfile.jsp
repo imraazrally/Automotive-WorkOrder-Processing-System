@@ -17,7 +17,7 @@
 				</div>
 			</div>
 			
-			<div id="screenBody" style="height:600px;">
+			<div id="screenBody" style="height:400px;">
 					
 					<!-- Customer Information -->
 					

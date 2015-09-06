@@ -5,20 +5,32 @@
 	</head>
 
 	<body>
-		<div id="screen">
+		<div id="screen" style="height:500px">
 			<div id=titleBar>
 				<div id="titleBarContent">
 					Hi <b>${key.username}</b>, welcome to admin home!<br>	
 				</div>
 			</div>
 			
-			<div id="screenBody">
+			<div id="screenBody" style="height:500px">
 				<i>Below are services available to you,</i>
-				<br>	<a href="customers.html">1. Add / Remove / Update Customers</a>
-				<br>	2. Lookup Parts with SKU
-				<br>	3. Lookup Parts with Vehicle Info.
-				<br>	3. Create Parts Work-Order 
+				
+				<hr>
+				
+				<b><u>Customers</u></b>
+				<br><a href="customers.html">1. Add New Customers</a>
+				<br><a href="selectCustomerUsingPhone.html">2. Lookup Customer Using Phone</a>
+				<br><a href="selectCustomerUsingName.html">3. Lookup Customer Using Name</a>
+				
+				<hr>
+				
+				<b><u>Parts</u></b>
+				<br>4. Lookup Parts with SKU
+				<br>5. Lookup Parts with Vehicle Info.
+				<br>6. Create Parts Work-Order 
 			</div>
+			
+			
 		
 		</div>
 	</body>

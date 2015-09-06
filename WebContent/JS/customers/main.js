@@ -1,15 +1,3 @@
-$(document).ready(function(){
-	$("#btnAdd").click(function(){
-		$("#results").load('forms/customers/addCustomer.txt');
-		$("#submit").html("<input type='button' value='Add Customer' onclick='addCustomer()'/>");
-	});
-	
-	$("#btnSelect").click(function(){
-		$("#results").load('forms/customers/selectCustomer.txt');
-		$("#submit").html("");
-	});
-
-});
 
 function addCustomer(){
 	var fName=$('#addFName').val();
@@ -27,7 +15,6 @@ function addCustomer(){
 			data:{fName:fName, lName:lName, email:email, phone:phone, address:address},
 			success:function(result){
 						$('#results').html(result);
-						$('#submit').html("");
 					}
 		});
 	}

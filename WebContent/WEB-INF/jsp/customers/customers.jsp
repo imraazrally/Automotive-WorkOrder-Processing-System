@@ -9,6 +9,7 @@
 
 	<body>
 		<div id="screen" style="height:300px !important">
+			
 			<div id="titleBar">
 				<div id="titleBarContent">
 					Customer Information
@@ -16,23 +17,30 @@
 			</div>
 			
 			<div id="screenBody">
-					<div id="menu">
-						<button id="btnSelect">Select Customer</button>
-						<button id="btnAdd">Create Account</button>
-						<hr>
-					</div>
-					
-					<form id="customerAction">
-		
-						<div id="results">	
-							Please Choose an Action
-						</div>		
-						
-						<div id="submit">
-						</div>
-					</form>
-					
+							<div id="results">
+												<form id="customerAction">
+													<div style="width:100px; display:inline; float:left;">
+														<br>First Name:
+														<br>Last Name:
+														<br>Email:
+														<br>Phone:	
+														<br>Address: 
+													</div>
+													
+													<div style="display:inline; float:left">
+														<br><input type="text" id="addFName"/>
+														<br><input type="text" id="addLName"/>
+														<br><input type="text" id="addEmail"/>
+														<br><input type="text" id="addPhone"/>
+														<br><input type="text" id="addAddress"/>
+													</div>	
+													
+													<br><br><br><br><br><br><br><input type="button" value="Create Account" onclick="addCustomer()"/>
+												</form>	
+							</div>		
 			</div>
+			
+			
 		</div>
 	</body>
 </html>

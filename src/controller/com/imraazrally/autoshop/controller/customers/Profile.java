@@ -13,7 +13,9 @@ import com.imraazrally.autoshop.model.customers.Customer;
 import com.imraazrally.autoshop.model.customers.CustomerAction;
 import com.imraazrally.autoshop.model.customers.CustomerProfile;
 import com.imraazrally.autoshop.model.customers.CustomerServices;
-import com.imraazrally.autoshop.model.customers.RetrieveCustomerUsingId;
+import com.imraazrally.autoshop.model.customers.ImportCustomersFromDb;
+import com.imraazrally.autoshop.model.customers.SelectCustomerQuery;
+import com.imraazrally.autoshop.model.customers.SelectCustomerUsingId;
 import com.imraazrally.autoshop.model.vehicle.ImportVehiclesFromDbUsingCustomerId;
 import com.imraazrally.autoshop.model.vehicle.Vehicle;
 import com.imraazrally.autoshop.model.vehicle.VehicleInfo;
@@ -34,13 +36,16 @@ public class Profile {
 		//Retrieving Database Connection from Session
 		Connection dbConnection = (Connection) request.getSession().getAttribute("dbConnection");
 		//Building Customer based on Input parameter from request (customerId)
-		Customer customer=new RetrieveCustomerUsingId(dbConnection,id).getCustomer();
-		//Retrieving Vehicle belonging to the customer
-		ImportVehiclesFromDbUsingCustomerId importVehicle=new ImportVehiclesFromDbUsingCustomerId(dbConnection, customer.getCustomerId());
-		//Building a Profile
-		CustomerProfile profile=new CustomerProfile(customer,importVehicle.getVehicleStorage());
-		//Forwarind Page
-		target.addObject("profile",profile);
+		try{
+			SelectCustomerQuery query=new SelectCustomerUsingId(dbConnection,id);
+			Customer customer=new ImportCustomersFromDb(dbConnection,query.execute()).getCustomers().get(0);
+			//Retrieving Vehicle belonging to the customer
+			ImportVehiclesFromDbUsingCustomerId importVehicle=new ImportVehiclesFromDbUsingCustomerId(dbConnection, customer.getCustomerId());
+			//Building a Profile
+			CustomerProfile profile=new CustomerProfile(customer,importVehicle.getVehicleStorage());
+			target.addObject("profile",profile);
+			//Forwarind Page
+		}catch(Exception e){e.printStackTrace();}
 		return target;
 	}
 }

@@ -9,6 +9,8 @@ import org.junit.Test;
 
 import com.imraazrally.autoshop.model.customers.AddCustomerAction;
 import com.imraazrally.autoshop.model.customers.Customer;
+import com.imraazrally.autoshop.model.customers.ImportCustomersFromDb;
+import com.imraazrally.autoshop.model.customers.SelectCustomerQuery;
 import com.imraazrally.autoshop.model.customers.SelectCustomerUsingPhone;
 import com.imraazrally.autoshop.model.login.LoginConsts;
 import com.imraazrally.autoshop.model.login.LoginDb;
@@ -59,7 +61,8 @@ public class CustomerTest {
 	// Using our customers phone number, we select the customer and check if the fisrt names match. 
 	public void selectCustomerUsingPhone() throws SQLException{
 		if(!ranAddCustomerTest) addCustomerTest();
-		assertEquals(customer.getFName(),new SelectCustomerUsingPhone(customer.getPhone(),dbConnection).getCustomers().get(0).getFName());
+		SelectCustomerQuery query=new SelectCustomerUsingPhone(dbConnection, customer.getPhone());
+		assertEquals(customer.getFName(),new ImportCustomersFromDb(dbConnection, query.execute()).getCustomers().get(0).getFName());
 	}
 	
 	

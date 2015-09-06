@@ -8,7 +8,7 @@
 		<div id="screen" style="height:180px !important; width:500px !important;">
 			<div id="titleBar" style="width:500px !important">
 				<div id="titleBarContent">
-					Select Customer Using Phone Number
+					Select Customer Using Name
 				</div>
 			</div>
 			
