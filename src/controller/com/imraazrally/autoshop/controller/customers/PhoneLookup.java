@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.imraazrally.autoshop.model.customers.Customer;
-import com.imraazrally.autoshop.model.customers.SelectCustomerQuery;
 import com.imraazrally.autoshop.model.customers.SelectCustomerUsingPhone;
 
 @Controller
@@ -31,7 +30,10 @@ public class PhoneLookup {
 				
 		//Given a phone number, getting a List of Customers which matches the phone number
 		try{
-			SelectCustomerUsingPhone select=new SelectCustomerUsingPhone(sessionFactory.openSession(),phoneNo);
+			Customer customerInfo=new Customer(){{
+				setPhone(phoneNo);
+			}};
+			SelectCustomerUsingPhone select=new SelectCustomerUsingPhone(customerInfo,sessionFactory.openSession());
 			//Storing the list of customers as an attribute
 			target.addObject("customers", select.getCustomers());
 		}catch(Exception e){e.printStackTrace();}

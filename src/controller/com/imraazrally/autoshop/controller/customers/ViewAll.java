@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.imraazrally.autoshop.model.customers.Customer;
 import com.imraazrally.autoshop.model.customers.SelectAllCustomers;
-import com.imraazrally.autoshop.model.customers.SelectCustomerQuery;
 
 @Controller
 public class ViewAll {
@@ -23,7 +22,7 @@ public class ViewAll {
 		SessionFactory sessionFactory=(SessionFactory)request.getSession().getAttribute("sessionFactory");
 		
 		try{
-			SelectAllCustomers select=new SelectAllCustomers(sessionFactory.openSession());
+			SelectAllCustomers select=new SelectAllCustomers(new Customer(),sessionFactory.openSession());
 			//Storing the list of customers as an attribute
 			target.addObject("customers", select.getCustomers());
 		}catch(Exception e){e.printStackTrace();}

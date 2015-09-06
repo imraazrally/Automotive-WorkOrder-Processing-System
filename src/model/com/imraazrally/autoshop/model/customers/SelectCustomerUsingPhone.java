@@ -7,27 +7,16 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-public class SelectCustomerUsingPhone {
-	private String phone;
-	private Session session;
-	private List <Customer> customers;
-	
-	public SelectCustomerUsingPhone(Session session, String phone){
-		this.session=session;
-		this.phone=phone;
-		execute();
+public class SelectCustomerUsingPhone extends SelectCustomer{
+
+	public SelectCustomerUsingPhone(Customer customerInfo, Session session) {
+		super(customerInfo, session);
 	}
 
-	public void execute(){
-		// The Query
-		String SQL=String.format(CustomerConsts.GET_CUSTOMER_USING_PHONE_QUERY,phone);
-		Query query=session.createSQLQuery(SQL).addEntity(Customer.class);
-		
-		// Store
-		customers=query.list();
+	@Override
+	public void select() {
+		String SQL=CustomerConsts.GET_CUSTOMER_USING_PHONE_QUERY;
+		execute(String.format(SQL, customerInfo.getPhone()));
 	}
-	
-	public List<Customer> getCustomers(){
-		return customers;
-	}
+
 }

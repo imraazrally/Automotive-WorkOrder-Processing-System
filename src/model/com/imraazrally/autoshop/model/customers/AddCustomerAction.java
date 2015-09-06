@@ -3,7 +3,11 @@ package com.imraazrally.autoshop.model.customers;
 import java.sql.Connection;
 import org.hibernate.Session;
 
+/*
+ 	Injects Customer Info the Database upon calling service()
+ */
 public class AddCustomerAction extends CustomerAction {
+	
 	private final Session session;
 	private final Customer customer;
 

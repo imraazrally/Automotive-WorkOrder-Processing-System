@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.imraazrally.autoshop.model.customers.Customer;
-import com.imraazrally.autoshop.model.customers.SelectCustomerQuery;
 import com.imraazrally.autoshop.model.customers.SelectCustomerUsingName;
 import com.imraazrally.autoshop.model.customers.SelectCustomerUsingPhone;
 
@@ -32,7 +31,11 @@ public class NameLookup {
 
 		//Given a first and last name, getting a List of Customers which matches the phone number
 		try{
-			SelectCustomerUsingName select=new SelectCustomerUsingName(fName,lName,sessionFactory.openSession());
+			Customer customerInfo=new Customer(){{
+				setFName(fName);
+				setLName(lName);
+			}};
+			SelectCustomerUsingName select=new SelectCustomerUsingName(customerInfo,sessionFactory.openSession());
 			//Storing the list of customers as an attribute
 			target.addObject("customers", select.getCustomers());
 		}catch(Exception e){e.printStackTrace();}

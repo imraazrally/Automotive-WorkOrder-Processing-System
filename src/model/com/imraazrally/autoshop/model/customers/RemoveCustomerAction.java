@@ -16,13 +16,17 @@ public class RemoveCustomerAction extends CustomerAction {
 	@Override
 	public boolean service() {
 		try{
-			session.beginTransaction();
-			session.delete(customer);
-			session.getTransaction().commit();
-			session.close();
-			return true;
+			return execute();
 		}catch(Exception e){e.printStackTrace();}
 		return false;
+	}
+	
+	public boolean execute(){
+		session.beginTransaction();
+		session.delete(customer);
+		session.getTransaction().commit();
+		session.close();
+		return true;
 	}
 
 }

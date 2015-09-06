@@ -7,26 +7,16 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-public class SelectCustomerUsingId{
-	private Session session;
-	private String customerId;
-	private List<Customer> customers;
-	
-	public SelectCustomerUsingId(Session session, String customerId){
-		this.session=session;
-		this.customerId=customerId;
-		execute();
+public class SelectCustomerUsingId extends SelectCustomer{
+
+	public SelectCustomerUsingId(Customer customerInfo, Session session) {
+		super(customerInfo, session);
 	}
-	
-	@SuppressWarnings("unchecked")
-	public void execute() {
-		String SQL=String.format(CustomerConsts.RETRIEVE_CUSTOMER_USING_ID_QUERY, customerId);
-		Query query=session.createSQLQuery(SQL).addEntity(Customer.class);
-		customers=query.list();
+
+	@Override
+	public void select() {
+		String customerId=Integer.toString(customerInfo.getCustomerId());
+		execute(String.format(CustomerConsts.RETRIEVE_CUSTOMER_USING_ID_QUERY, customerId));
 	}
-	
-	public List<Customer> getCustomers(){
-		return customers;
-	}
-	
+
 }

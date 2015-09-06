@@ -14,7 +14,6 @@ import com.imraazrally.autoshop.model.customers.Customer;
 import com.imraazrally.autoshop.model.customers.CustomerAction;
 import com.imraazrally.autoshop.model.customers.CustomerProfile;
 import com.imraazrally.autoshop.model.customers.CustomerServices;
-import com.imraazrally.autoshop.model.customers.SelectCustomerQuery;
 import com.imraazrally.autoshop.model.customers.SelectCustomerUsingId;
 import com.imraazrally.autoshop.model.vehicle.ImportVehiclesFromDbUsingCustomerId;
 import com.imraazrally.autoshop.model.vehicle.Vehicle;
@@ -38,7 +37,11 @@ public class Profile {
 	
 		//Building Customer based on Input parameter from request (customerId)
 		try{
-			SelectCustomerUsingId select=new SelectCustomerUsingId(sessionFactory.openSession(),id);
+			Customer customerInfo=new Customer(){{
+				setCustomerId(new Integer(id));
+			}};
+			
+			SelectCustomerUsingId select=new SelectCustomerUsingId(customerInfo,sessionFactory.openSession());
 			ImportVehiclesFromDbUsingCustomerId importVehicle=new ImportVehiclesFromDbUsingCustomerId(sessionFactory.openSession(), new Integer(id));
 
 			//Building a Profile
