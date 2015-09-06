@@ -2,20 +2,29 @@ package com.imraazrally.autoshop.model.customers;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.util.List;
 
-public class SelectAllCustomers extends SelectCustomerQuery {
+import org.hibernate.Query;
+import org.hibernate.Session;
 
-	public SelectAllCustomers(Connection dbConnection){
-		this.dbConnection=dbConnection;
+public class SelectAllCustomers{
+	private Session session;
+	private List<Customer> customers;
+	
+	public SelectAllCustomers(Session session){
+		this.session=session;
+		execute();
 	}
 	
-	@Override
-	public ResultSet execute() {
-		try{
-			String query=CustomerConsts.RETRIEVE_ALL_CUSTOMERS;
-			return dbConnection.createStatement().executeQuery(query);
-		}catch(Exception e){e.printStackTrace();}
-		return null;
+	
+	public void execute() {
+		String SQL=String.format(CustomerConsts.RETRIEVE_ALL_CUSTOMERS);
+		Query query=session.createSQLQuery(SQL).addEntity(Customer.class);
+		customers=query.list();
+	}
+	
+	public List<Customer> getCustomers(){
+		return customers;
 	}
 
 }

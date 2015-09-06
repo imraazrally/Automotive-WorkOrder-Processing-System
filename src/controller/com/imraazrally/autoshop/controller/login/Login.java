@@ -5,6 +5,8 @@ import java.sql.*;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,19 +27,28 @@ import com.imraazrally.autoshop.model.login.User;
 @Controller
 public class Login {
 	@RequestMapping("/login")
-	public ModelAndView authenticate(@RequestParam(value = "username") String username,
-			@RequestParam(value = "password") String password, HttpServletRequest request) {
+	public ModelAndView authenticate(
+			@RequestParam(value = "username") String username,
+			@RequestParam(value = "password") String password, 
+			HttpServletRequest request) 
+	{
 		// Target homepage that we will forward our user to
 		ModelAndView target = new ModelAndView();
+		
 		// Using the LoginDb Service to get a handle on a database connection
 		Connection dbConnection = new LoginDb().getConnection(LoginConsts.DB_URL, LoginConsts.DB_USER,
 				LoginConsts.DB_PASS);
 		request.getSession().setAttribute("dbConnection", dbConnection);
+		
 		// Passing the database connection to a KeyGen service and generate a
-		// key (based on the username and password)
 		Key key = new KeyGen().getKey(new User(username, password, dbConnection));
-		target.addObject("key", key);
 		request.getSession().setAttribute("key", key);
+		target.addObject("key", key);
+
+		// Hibernate Configs
+		SessionFactory sessionFactory=new Configuration().configure().buildSessionFactory();
+		request.getSession().setAttribute("sessionFactory", sessionFactory);
+		
 		// Based on the KEY's roleID, we forward to user to appropriate view.
 		target.setViewName(LoginConsts.roleIdToView.get(key.getRole()));
 		return target;

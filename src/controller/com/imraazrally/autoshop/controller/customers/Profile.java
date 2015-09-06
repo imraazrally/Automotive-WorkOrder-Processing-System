@@ -4,6 +4,7 @@ import java.sql.Connection;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,7 +14,6 @@ import com.imraazrally.autoshop.model.customers.Customer;
 import com.imraazrally.autoshop.model.customers.CustomerAction;
 import com.imraazrally.autoshop.model.customers.CustomerProfile;
 import com.imraazrally.autoshop.model.customers.CustomerServices;
-import com.imraazrally.autoshop.model.customers.ImportCustomersFromDb;
 import com.imraazrally.autoshop.model.customers.SelectCustomerQuery;
 import com.imraazrally.autoshop.model.customers.SelectCustomerUsingId;
 import com.imraazrally.autoshop.model.vehicle.ImportVehiclesFromDbUsingCustomerId;
@@ -33,15 +33,16 @@ public class Profile {
 	){
 		//Which view to forward the customer to ?
 		ModelAndView target=new ModelAndView("customers/customerProfile");
-		//Retrieving Database Connection from Session
-		Connection dbConnection = (Connection) request.getSession().getAttribute("dbConnection");
+		Connection dbConnection=(Connection)request.getSession().getAttribute("dbConnection");
+		SessionFactory sessionFactory=(SessionFactory)request.getSession().getAttribute("sessionFactory");
+	
 		//Building Customer based on Input parameter from request (customerId)
 		try{
-			SelectCustomerQuery query=new SelectCustomerUsingId(dbConnection,id);
-			Customer customer=new ImportCustomersFromDb(dbConnection,query.execute()).getCustomers().get(0);
-			//Retrieving Vehicle belonging to the customer
-			ImportVehiclesFromDbUsingCustomerId importVehicle=new ImportVehiclesFromDbUsingCustomerId(dbConnection, customer.getCustomerId());
+			SelectCustomerUsingId select=new SelectCustomerUsingId(sessionFactory.openSession(),id);
+			ImportVehiclesFromDbUsingCustomerId importVehicle=new ImportVehiclesFromDbUsingCustomerId(dbConnection, new Integer(id));
+
 			//Building a Profile
+			Customer customer=select.getCustomers().get(0);
 			CustomerProfile profile=new CustomerProfile(customer,importVehicle.getVehicleStorage());
 			target.addObject("profile",profile);
 			//Forwarind Page

@@ -1,25 +1,35 @@
 package com.imraazrally.autoshop.model.customers;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
-public class SelectCustomerUsingName extends SelectCustomerQuery{
+import org.hibernate.Query;
+import org.hibernate.Session;
+
+public class SelectCustomerUsingName {
 	private String fName;
 	private String lName;
+	private Session session;
+	private List<Customer>customers;
 	
-	public SelectCustomerUsingName(Connection dbConnection, String fName, String lName){
-		this.dbConnection=dbConnection;
+	public SelectCustomerUsingName(String fName, String lName, Session session){
 		this.fName=fName;
 		this.lName=lName;
+		this.session=session;
+		execute();
 	}
 	
-	@Override
-	public ResultSet execute() {
-		try{
-			String query=String.format(CustomerConsts.GET_CUSTOMER_USING_NAME_QUERY, fName,lName);
-			return dbConnection.createStatement().executeQuery(query);
-		}catch(Exception e){e.printStackTrace();}
-		return null;
+	@SuppressWarnings("unchecked")
+	public void execute(){
+		// The Query
+		String SQL=String.format(CustomerConsts.GET_CUSTOMER_USING_NAME_QUERY,fName,lName);
+		Query query=session.createSQLQuery(SQL).addEntity(Customer.class);		
+		// Storing the List of Customers
+		customers=query.list();
+	}
+	
+	public List<Customer> getCustomers(){
+		return customers;
 	}
 	
 }

@@ -1,6 +1,13 @@
 package com.imraazrally.autoshop.model.customers;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="customer_info")
 public class Customer {
+	@Id
 	private int customerId;
 	private String fName;
 	private String lName;
@@ -24,6 +31,9 @@ public class Customer {
 		this.phone = phone;
 		this.address =address;
 	}
+	
+	public Customer (){}
+	public Customer (int customerId){this.customerId=customerId;}
 	
 	public String getFName() {
 		return fName;

@@ -7,11 +7,13 @@ import java.sql.Connection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.imraazrally.autoshop.model.customers.Customer;
 import com.imraazrally.autoshop.model.customers.CustomerAction;
 import com.imraazrally.autoshop.model.customers.CustomerServices;
 import com.imraazrally.autoshop.model.customers.PrintAjaxResponse;
@@ -39,12 +41,13 @@ public class RemoveCustomer {
 		ModelAndView target=new ModelAndView("messageBox");
 		// Verify Permission Using the key 
 		Key key = (Key) request.getSession().getAttribute("key");
-		
-		// Database Connection
-		Connection dbConnection=(Connection) request.getSession().getAttribute("dbConnection");
+
+		// Hibernate Session
+		SessionFactory sessionFactory=(SessionFactory) request.getSession().getAttribute("sessionFactory");
 		
 		//Actions
-		CustomerAction removeCustomerUsingId=new RemoveCustomerAction(dbConnection,id);
+		Customer customer=new Customer(new Integer(id));
+		CustomerAction removeCustomerUsingId=new RemoveCustomerAction(customer,sessionFactory.openSession());
 		
 	 
 		if(verifyPermissions(key)){

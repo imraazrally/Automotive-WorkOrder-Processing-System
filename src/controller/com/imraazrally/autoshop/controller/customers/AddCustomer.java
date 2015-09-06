@@ -7,6 +7,7 @@ import java.sql.Connection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,7 +36,8 @@ public class AddCustomer {
 
 	) throws IOException {
 		// 0. Prerequesites
-		Connection dbConnection = (Connection) request.getSession().getAttribute("dbConnection");
+		SessionFactory sessionFactory=(SessionFactory)request.getSession().getAttribute("sessionFactory");
+				
 		PrintWriter ajaxResponseWriter = response.getWriter();
 
 		// 1. Creating Customer Object
@@ -45,7 +47,7 @@ public class AddCustomer {
 		CustomerServices customerServices = new CustomerServices();
 
 		// 3. Actions to perform
-		CustomerAction addCustomer = new AddCustomerAction(dbConnection, customer);
+		CustomerAction addCustomer = new AddCustomerAction(customer,sessionFactory.openSession());
 		CustomerAction printAjaxSuccessResponse = new PrintAjaxResponse(ajaxResponseWriter,
 				CustomerConsts.ADD_CUSTOMER_SUCCESS_MESSAGE);
 		CustomerAction printAjaxFailureResponse = new PrintAjaxResponse(ajaxResponseWriter,

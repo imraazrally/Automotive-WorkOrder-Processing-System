@@ -2,20 +2,24 @@ package com.imraazrally.autoshop.model.customers;
 
 import java.sql.Connection;
 
+import org.hibernate.Session;
+
 public class RemoveCustomerAction extends CustomerAction {
-	private final Connection dbConnection;
-	private final String customerId;
+	private final Customer customer;
+	private final Session session;
 	
-	public RemoveCustomerAction(Connection dbConnection, String customerId){
-		this.dbConnection=dbConnection;
-		this.customerId=customerId;
+	public RemoveCustomerAction(Customer customer, Session session){
+		this.customer=customer;
+		this.session=session;
 	}
 	
 	@Override
 	public boolean service() {
-		String query=String.format(CustomerConsts.REMOVE_CUSTOMER_QUERY, customerId);
 		try{
-			dbConnection.createStatement().execute(query);
+			session.beginTransaction();
+			session.delete(customer);
+			session.getTransaction().commit();
+			session.close();
 			return true;
 		}catch(Exception e){e.printStackTrace();}
 		return false;
