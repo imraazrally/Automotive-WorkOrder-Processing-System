@@ -42,7 +42,7 @@ public class Profile {
 			}};
 			
 			SelectCustomerUsingId select=new SelectCustomerUsingId(customerInfo,sessionFactory.openSession());
-			ImportVehiclesFromDbUsingCustomerId importVehicle=new ImportVehiclesFromDbUsingCustomerId(sessionFactory.openSession(), new Integer(id));
+			ImportVehiclesFromDbUsingCustomerId importVehicle=new ImportVehiclesFromDbUsingCustomerId(sessionFactory.openSession(), id);
 
 			//Building a Profile
 			Customer customer=select.getCustomers().get(0);

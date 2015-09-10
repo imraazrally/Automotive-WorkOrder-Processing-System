@@ -27,8 +27,14 @@
 					E-mail: 	 ${profile.customerInfo.email}<br>
 					Phone: 		 ${profile.customerInfo.phone}<br>
 					Address:	 ${profile.customerInfo.address}<br>
-					<hr>
 					
+					<br>
+					
+					<div id="actions">
+						<a href="addVehicle.html?customerId=${profile.customerInfo.customerId}">[Add Vehicle]</a> 
+					</div>
+					
+					<hr>
 					<!-- Vehicles Belonging to the Customer -->
 					<table id="tblResults">
 						<tr>

@@ -8,6 +8,7 @@ import javax.persistence.Table;
 @Table(name="vehicles")
 public class VehicleInfo {
 	@Id
+	private  int id;
 	private  int customerId;
 	private  int year;
 	private  String make;

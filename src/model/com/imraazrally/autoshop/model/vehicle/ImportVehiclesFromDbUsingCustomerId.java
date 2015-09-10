@@ -9,10 +9,10 @@ import org.hibernate.Session;
 
 public class ImportVehiclesFromDbUsingCustomerId {
 	private final Session session;
-	private final int customerId;
+	private final String customerId;
 	private final VehicleStorage vehicleStorage;
 	
-	public ImportVehiclesFromDbUsingCustomerId(Session session, int customerId){
+	public ImportVehiclesFromDbUsingCustomerId(Session session, String customerId){
 		this.session=session;
 		this.customerId=customerId;
 		vehicleStorage=new VehicleStorage();
@@ -21,7 +21,7 @@ public class ImportVehiclesFromDbUsingCustomerId {
 	
 	@SuppressWarnings("unchecked")
 	public void importVehiclesFromDb(){
-		String SQL=String.format(VehicleConsts.IMPORT_VEHICLE_QUERY,Integer.toString(customerId));
+		String SQL=String.format(VehicleConsts.IMPORT_VEHICLE_QUERY,customerId);
 		try{
 			Query query=session.createSQLQuery(SQL).addEntity(VehicleInfo.class);
 			query.list().forEach (vehicle -> vehicleStorage.add(new Vehicle((VehicleInfo) vehicle)));
