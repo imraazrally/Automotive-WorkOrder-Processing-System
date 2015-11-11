@@ -35,21 +35,19 @@ public class AddCustomer {
 			@RequestParam(value = "address") String address, HttpServletRequest request, HttpServletResponse response
 
 	) throws IOException {
-		// 0. Prerequesites
+		// Prerequesites
 		SessionFactory sessionFactory=(SessionFactory)request.getSession().getAttribute("sessionFactory");
 		PrintWriter ajaxResponseWriter = response.getWriter();
 
-		// 1. Creating Customer Object
 		Customer customer = new Customer(fName,lName,phone,email,address);
-		// 2. Creating Customer Services Object
 		CustomerServices customerServices = new CustomerServices();
 
-		// 3. Actions to perform
+		// Actions to perform
 		CustomerAction addCustomer = new AddCustomerAction(customer,sessionFactory.openSession());
 		CustomerAction printAjaxSuccessResponse = new PrintAjaxResponse(ajaxResponseWriter,CustomerConsts.ADD_CUSTOMER_SUCCESS_MESSAGE);
 		CustomerAction printAjaxFailureResponse = new PrintAjaxResponse(ajaxResponseWriter,CustomerConsts.ADD_CUSTOMER_FAIL_MESSAGE);
 
-		// 3. Adding Customer to database and printing ajax response message
+		// Adding Customer to database and printing ajax response message
 		if (customerServices.execute(addCustomer)) {
 			customerServices.execute(printAjaxSuccessResponse);
 		} else {
